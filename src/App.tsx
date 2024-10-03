@@ -6,6 +6,7 @@ import About from "./components/About";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
+import Accordion from "./components/Accordion/Accordion";
 
 function App() {
   return (
@@ -30,6 +31,9 @@ function App() {
         <a style={{ padding: 10 }} href="/">
           Home
         </a>
+        <a style={{ padding: 10 }} href="/accordion">
+          Accordion
+        </a>
         <a style={{ padding: 10 }} href="/about">
           About
         </a>
@@ -50,6 +54,7 @@ function App() {
             <Route path="/about" element={<About />}></Route>
           </Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/accordion" element={<Accordion />}></Route>
         </Routes>
       </BrowserRouter>
       {/* <ShimmerUI />; */}
