@@ -7,6 +7,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Accordion from "./components/Accordion/Accordion";
+import { NestedComments } from "./components/NestedComments/NestedComments";
 
 function App() {
   return (
@@ -34,6 +35,9 @@ function App() {
         <a style={{ padding: 10 }} href="/accordion">
           Accordion
         </a>
+        <a style={{ padding: 10 }} href="/comments">
+          Nested Comments
+        </a>
         <a style={{ padding: 10 }} href="/about">
           About
         </a>
@@ -55,6 +59,7 @@ function App() {
           </Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/accordion" element={<Accordion />}></Route>
+          <Route path="/comments" element={<NestedComments />}></Route>
         </Routes>
       </BrowserRouter>
       {/* <ShimmerUI />; */}
