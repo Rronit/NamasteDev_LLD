@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Profile from "./components/Profile";
 import Accordion from "./components/Accordion/Accordion";
 import { NestedComments } from "./components/NestedComments/NestedComments";
+import ImagerSlider from "./components/ImagerSlider";
 
 function App() {
   return (
@@ -38,6 +39,9 @@ function App() {
         <a style={{ padding: 10 }} href="/comments">
           Nested Comments
         </a>
+        <a style={{ padding: 10 }} href="/slider">
+          Image Slider
+        </a>
         <a style={{ padding: 10 }} href="/about">
           About
         </a>
@@ -60,6 +64,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/accordion" element={<Accordion />}></Route>
           <Route path="/comments" element={<NestedComments />}></Route>
+          <Route path="/slider" element={<ImagerSlider />}></Route>
         </Routes>
       </BrowserRouter>
       {/* <ShimmerUI />; */}
