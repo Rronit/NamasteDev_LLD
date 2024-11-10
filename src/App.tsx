@@ -9,6 +9,7 @@ import Profile from "./components/Profile";
 import Accordion from "./components/Accordion/Accordion";
 import { NestedComments } from "./components/NestedComments/NestedComments";
 import ImagerSlider from "./components/ImagerSlider";
+import SearchUI from "./components/Search-UI/SearchUI";
 
 function App() {
   return (
@@ -42,6 +43,9 @@ function App() {
         <a style={{ padding: 10 }} href="/slider">
           Image Slider
         </a>
+        <a style={{ padding: 10 }} href="/searchUI">
+          Search UI
+        </a>
         <a style={{ padding: 10 }} href="/about">
           About
         </a>
@@ -61,6 +65,7 @@ function App() {
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/about" element={<About />}></Route>
           </Route>
+          <Route path="/searchUI" element={<SearchUI />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/accordion" element={<Accordion />}></Route>
           <Route path="/comments" element={<NestedComments />}></Route>
