@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Web Component</title>
+  <script src="./simple-card.js" defer></script>
+</head>
+
+<body>
+
+  <h1>Web Components with Slots and Templates</h1>
+
+  <simple-card>
+    <h2 slot="title">Welcome</h2>
+    <p>This is some content inside the card. It will be placed in the default slot.</p>
+    <span style="font-weight: 600;">Web components are great!</span>
+  </simple-card>
+
+  <simple-card>
+    <h2 slot="title">Another Card</h2>
+    <p>This card has different content.</p>
+  </simple-card>
+
+</body>
+
+</html>
