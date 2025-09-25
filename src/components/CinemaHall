@@ -1,0 +1,89 @@
+import { useState } from "react";
+import "./styles.css";
+
+const ROW = 10,
+  COL = 10;
+
+export default function CinemaHall() {
+  const [selectedSeat, setSelectedSeat] = useState({})
+  const [bookSeat, setBookSeat] = useState({})
+
+  function seatClicked(seat) {
+    if (bookSeat[seat]) return;
+    if (selectedSeat[seat]) {
+      setSelectedSeat(prev => {
+        return {
+          ...prev,
+          ...{ [seat]: false }
+        }
+
+      })
+    } else {
+      
+      setSelectedSeat(prev => {
+        return {
+          ...prev,
+          ...{ [seat]: true }
+        }
+
+      })
+    }
+  }
+
+  function bookSeats() {
+    let kko = {}
+    if (Object.keys(selectedSeat).length === 0) {
+      alert("Please select at least one seat");
+      return;
+    }
+    for (let it in selectedSeat) {
+      kko = { ...kko, ...{ [it]: true } }
+    }
+    
+    setBookSeat(prev => { return { ...prev, ...kko } });
+    setSelectedSeat({})
+  }
+  function clearSeats() {
+    setSelectedSeat({})
+  }
+  function resetSeats() {
+    setSelectedSeat({});
+    setBookSeat({})
+  }
+
+  return (
+    <div className="main-container">
+      <h1>Cinema Hall</h1>
+      <div className="button-section">
+        <button data-testid="book-button" onClick={bookSeats}>
+          Book Seats
+        </button>
+        <button data-testid="clear-button" onClick={clearSeats}>
+          Clear
+        </button>
+        <button data-testid="reset-button" onClick={resetSeats}>
+          Reset
+        </button>
+      </div>
+      <div className="cinema-hall" data-testid="cinema-hall">
+        {Array.from({ length: ROW }, (_, rowIdx) => (
+          <div className="row" key={rowIdx}>
+            {Array.from({ length: COL }, (_, colIdx) => {
+              let char = String.fromCharCode(65 + rowIdx)
+              return (
+                <div
+                  // className={"col"}
+                  key={colIdx}
+                  data-testid={`seat-${char}${colIdx}`}
+                  onClick={() => seatClicked(`${char}${colIdx}`)}
+                  className={ selectedSeat[`${char}${colIdx}`] ? "selected-seat col" : bookSeat[`${char}${colIdx}`]?"disabled-seat col":"seat col" }>
+                  {char}{colIdx}
+                </div>
+              );
+            })}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
