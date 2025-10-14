@@ -1,0 +1,114 @@
+import "./styles.css";
+import React, {
+  useState,
+  Suspense,
+  createContext,
+  useContext,
+  useEffect,
+  cache,
+  use,
+} from "react";
+
+const WrapPromise = (promise) => {
+  let status = "pending";
+  let result;
+  const suspender = promise.then(
+    (r) => {
+      status = "success";
+      result = r;
+    },
+    (e) => {
+      status = "error";
+      result = e;
+    }
+  );
+
+  return function () {
+    if (status === "pending") throw suspender;
+    if (status === "error") throw result;
+    return result;
+  };
+};
+
+class ErrorBoundry extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { error: null, hasError: false };
+  }
+  static getDerivedStateFromError(error) {
+    return { error, hasError: true };
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <div>{"Has Error"}</div>;
+    }
+    return this.props.children;
+  }
+}
+
+const fetchCount = () =>
+  WrapPromise(
+    new Promise((res, rej) => {
+      setTimeout(() => {
+        res(100);
+      }, 2000);
+    })
+  );
+
+const fetchShow = () =>
+  WrapPromise(
+    new Promise((res, rej) => {
+      setTimeout(() => {
+        res(10);
+      }, 2000);
+    })
+  );
+
+const resource = fetchCount();
+const reShow = fetchShow();
+
+function Counter() {
+  const count = resource();
+  return (
+    <div
+      style={{
+        background: "grey",
+        padding: 15,
+      }}
+    >
+      {count}
+    </div>
+  );
+}
+
+function Show() {
+  const count = reShow();
+  return (
+    <div
+      style={{
+        background: "grey",
+        padding: 15,
+      }}
+    >
+      {count}
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      {/* <ErrorBoundry>
+        <Suspense fallback={<div>Loading....</div>}>
+          <Counter />
+        </Suspense>
+      </ErrorBoundry> */}
+      <ErrorBoundry>
+        <Suspense fallback={<div>Loading 123....</div>}>
+          <Show />
+        </Suspense>
+      </ErrorBoundry>
+    </>
+  );
+}
